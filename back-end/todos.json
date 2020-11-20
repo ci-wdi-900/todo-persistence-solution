@@ -1,0 +1,42 @@
+{
+  "todos": [
+    {
+      "text": "make todo app better",
+      "isComplete": true,
+      "priority": 1,
+      "categories": []
+    },
+    {
+      "text": "finish the emoji movie project",
+      "isComplete": true,
+      "priority": 2,
+      "categories": []
+    },
+    {
+      "text": "catch up on netflix",
+      "isComplete": false,
+      "priority": 1,
+      "categories": []
+    },
+    {
+      "text": "read book for book club",
+      "isComplete": false,
+      "priority": 2,
+      "categories": []
+    },
+    {
+      "text": "internalize what a callback is",
+      "isComplete": true,
+      "priority": 1,
+      "categories": []
+    },
+    {
+      "text": "really get into callbacks",
+      "isComplete": false,
+      "priority": 1,
+      "categories": []
+    }
+  ],
+
+  "categories": []
+}
