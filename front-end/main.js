@@ -50,7 +50,7 @@ const displayTodos = function() {
   console.log('\nHere are your current todos:\n')
   for (let i = 0; i < todos.length; i++) {
     console.log(i + 1 + '. ' + todos[i].text + ' ' + '- priority: ' + todos[i].priority + ' - ' + (todos[i].isComplete ? '✅' : '✖'));
-    // or, with a ternary:
+    // or, with interpolation:
     // console.log(`${i + 1}. ${todos[i].text} - priority: ${todos[i].priority} - ${todos[i].isComplete ? '✅' : '✖'}`);
   }
 }
