@@ -6,7 +6,7 @@ const PATH_TO_TODOS_FILE = __dirname + '/../back-end/todos.json';
 let todos = [];
 const interface = readline.createInterface({
   input: process.stdin,
-  output: process.stdout
+  output: process.stdout,
 })
 
 const saveTodos = function() {
@@ -19,20 +19,26 @@ const saveTodos = function() {
   const newContents = JSON.stringify(data, null, 2);
 
   // write that JSON string into the file
-  fs.writeFileSync(PATH_TO_TODOS_FILE, newContents);
+  fs.writeFile(PATH_TO_TODOS_FILE, newContents, 'utf8', (err) => {
+    if (err) {
+      throw error;
+    }
+
+    console.log('\n\nYour changes have been saved! What do you want to do next?\n')
+  });
 }
 
 const displayMenu = function() {
   const menu = `
-  Your options are:
+Your options are:
 
-  1. Add a todo.
-  2. Remove a todo.
-  3. Remove all completed todos.
-  4. Toggle a todo's completion status.
-  5. Toggle a todo's priority.
+1. Add a todo.
+2. Remove a todo.
+3. Remove all completed todos.
+4. Toggle a todo's completion status.
+5. Toggle a todo's priority.
 
-  Type "q" or "quit" to quit.
+Type "q" or "quit" to quit.
 
 `
 
@@ -40,6 +46,7 @@ const displayMenu = function() {
 }
 
 const displayTodos = function() {
+  console.clear();
   console.log('\nHere are your current todos:\n')
   for (let i = 0; i < todos.length; i++) {
     console.log(i + 1 + '. ' + todos[i].text + ' ' + '- priority: ' + todos[i].priority + ' - ' + (todos[i].isComplete ? '✅' : '✖'));
@@ -126,6 +133,7 @@ const handleMenu = function(cmd) {
     console.log('Quitting!');
     interface.close();
   } else {
+    displayTodos();
     displayMenu();
   }
 }
