@@ -13,7 +13,6 @@ const saveTodos = function() {
   // make a data object with our updated todos array as its todos property
   const data = {
     todos: todos,
-    categories: categories,
   };
 
   // make that object into a JSON string
@@ -25,15 +24,15 @@ const saveTodos = function() {
 
 const displayMenu = function() {
   const menu = `
-Your options are:
+  Your options are:
 
-1. Add a todo.
-2. Remove a todo.
-3. Remove all completed todos.
-4. Toggle a todo's completion status.
-5. Toggle a todo's priority.
-6. Add a new category.
-7. Quit.
+  1. Add a todo.
+  2. Remove a todo.
+  3. Remove all completed todos.
+  4. Toggle a todo's completion status.
+  5. Toggle a todo's priority.
+
+  Type "q" or "quit" to quit.
 
 `
 
@@ -43,7 +42,7 @@ Your options are:
 const displayTodos = function() {
   console.log('\nHere are your current todos:\n')
   for (let i = 0; i < todos.length; i++) {
-    console.log(i + 1 + '. ' + todos[i].text + ' ' + (todos[i].isComplete ? '✅' : '✖'));
+    console.log(i + 1 + '. ' + todos[i].text + ' ' + '- priority: ' + todos[i].priority + ' - ' + (todos[i].isComplete ? '✅' : '✖'));
   }
 }
 
@@ -68,20 +67,6 @@ const remove = function(num) {
 }
 
 const toggleComplete = function(num) {
-  const todo = todos[num - 1];
-  if (todo.isComplete) {
-    todo.isComplete = false;
-  } else {
-    todo.isComplete = true;
-  }
-
-  saveTodos();
-  displayTodos();
-  displayMenu();
-}
-
-// or, with a bang operator:
-const toggleCompleteAlt = function(num) {
   const todo = todos[num - 1];
   todo.isComplete = !todo.isComplete;
 
@@ -137,12 +122,11 @@ const handleMenu = function(cmd) {
   } else if (cmd === '5') {
     displayTodos();
     interface.question('\nPlease pick a todo to toggle its priority: ', togglePriority)
-  } else if (cmd === '6') {
-    displayTodos();
-    interface.question('\nWhat category would you like to add? ', addCategory)
-  } else {
+  } else if (cmd === 'q' || cmd === 'quit'){
     console.log('Quitting!');
     interface.close();
+  } else {
+    displayMenu();
   }
 }
 
@@ -150,7 +134,6 @@ const handleMenu = function(cmd) {
 fs.readFile(PATH_TO_TODOS_FILE, (err, data) => {
   const obj = JSON.parse(data);
   todos = obj.todos;
-  categories = obj.categories;
   displayTodos();
   displayMenu();
 });
