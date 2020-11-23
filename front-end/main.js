@@ -21,7 +21,7 @@ const saveTodos = function() {
   // write that JSON string into the file
   fs.writeFile(PATH_TO_TODOS_FILE, newContents, 'utf8', (err) => {
     if (err) {
-      throw error;
+      throw err;
     }
 
     console.log('\n\nYour changes have been saved! What do you want to do next?\n')
@@ -142,6 +142,10 @@ const handleMenu = function(cmd) {
 
 
 fs.readFile(PATH_TO_TODOS_FILE, (err, data) => {
+  if (err) {
+    throw err;
+  }
+
   const obj = JSON.parse(data);
   todos = obj.todos;
   displayTodos();
